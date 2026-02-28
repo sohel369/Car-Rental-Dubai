@@ -1,0 +1,121 @@
+{
+    "nav": {
+        "home": "Home",
+        "cars": "Our Fleet",
+        "about": "About",
+        "contact": "Contact",
+        "blog": "Blog",
+        "signIn": "Sign In",
+        "signUp": "Sign Up",
+        "dashboard": "Dashboard",
+        "signOut": "Sign Out"
+    },
+    "hero": {
+        "badge": "Dubai's #1 Premium Car Rental",
+        "title": "Drive Your Dream",
+        "subtitle": "in Dubai",
+        "description": "Experience luxury on every road. Choose from 200+ premium vehicles with instant booking, transparent pricing, and 24/7 support.",
+        "cta": "Browse Fleet",
+        "ctaSecondary": "Book Now",
+        "pickupLabel": "Pick-up Location",
+        "dropoffLabel": "Drop-off Location",
+        "pickupDate": "Pick-up Date",
+        "dropoffDate": "Drop-off Date",
+        "searchCars": "Search Cars"
+    },
+    "cars": {
+        "title": "Our Premium Fleet",
+        "subtitle": "Choose from our curated collection of luxury and economy vehicles",
+        "perDay": "/ day",
+        "bookNow": "Book Now",
+        "viewDetails": "View Details",
+        "available": "Available",
+        "unavailable": "Unavailable",
+        "filters": {
+            "all": "All Cars",
+            "economy": "Economy",
+            "luxury": "Luxury",
+            "suv": "SUV",
+            "sports": "Sports"
+        },
+        "specs": {
+            "seats": "Seats",
+            "doors": "Doors",
+            "transmission": "Transmission",
+            "fuel": "Fuel"
+        }
+    },
+    "booking": {
+        "title": "Complete Your Booking",
+        "personalInfo": "Personal Information",
+        "addons": "Add-ons",
+        "payment": "Payment",
+        "confirmation": "Confirmation",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "childSeat": "Child Seat",
+        "additionalDriver": "Additional Driver",
+        "unlimitedKM": "Unlimited KM",
+        "promoCode": "Promo Code",
+        "apply": "Apply",
+        "total": "Total",
+        "payNow": "Pay Now",
+        "bookingSuccess": "Booking Confirmed!",
+        "bookingRef": "Booking Reference"
+    },
+    "auth": {
+        "signIn": "Sign In",
+        "signUp": "Create Account",
+        "forgotPassword": "Forgot Password?",
+        "resetPassword": "Reset Password",
+        "email": "Email Address",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "fullName": "Full Name",
+        "orContinueWith": "Or continue with",
+        "google": "Continue with Google",
+        "alreadyHaveAccount": "Already have an account?",
+        "dontHaveAccount": "Don't have an account?",
+        "resetEmailSent": "Password reset email sent! Check your inbox.",
+        "backToLogin": "Back to Sign In"
+    },
+    "dashboard": {
+        "title": "My Dashboard",
+        "bookings": "My Bookings",
+        "profile": "Profile",
+        "invoices": "Invoices",
+        "activeBookings": "Active Bookings",
+        "pastBookings": "Past Bookings",
+        "cancelBooking": "Cancel Booking",
+        "downloadInvoice": "Download Invoice",
+        "settings": "Settings",
+        "noBookings": "You haven't made any bookings yet.",
+        "confirmCancel": "Are you sure you want to cancel this booking?",
+        "cancelSuccess": "Booking cancelled successfully"
+    },
+    "footer": {
+        "description": "Dubai's premier car rental service. Drive the finest vehicles at unbeatable prices.",
+        "quickLinks": "Quick Links",
+        "contact": "Contact Us",
+        "followUs": "Follow Us",
+        "rights": "All rights reserved.",
+        "phone": "+971 XX XXX XXXX",
+        "email": "info@goldenkey.ae",
+        "address": "Dubai, UAE"
+    },
+    "common": {
+        "loading": "Loading...",
+        "error": "Something went wrong",
+        "retry": "Try Again",
+        "cancel": "Cancel",
+        "save": "Save",
+        "edit": "Edit",
+        "delete": "Delete",
+        "confirm": "Confirm",
+        "back": "Back",
+        "next": "Next",
+        "currency": "AED"
+    }
+}
