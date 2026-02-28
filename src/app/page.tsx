@@ -9,10 +9,12 @@ import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { carsData } from '@/data/cars';
 import { Star, Award, Shield, Clock, ChevronRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 const categories = ['all', 'economy', 'luxury', 'suv', 'sports'] as const;
 
 export default function HomePage() {
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<typeof categories[number]>('all');
 
   const filteredCars = activeCategory === 'all'
@@ -33,18 +35,18 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="section-badge"><Award size={12} /> Why Golden Key?</span>
-              <h2 className="section-title">Experience the Difference</h2>
+              <span className="section-badge"><Award size={12} /> {t('home.whyBadge')}</span>
+              <h2 className="section-title">{t('home.whyTitle')}</h2>
               <div className="divider-gold"></div>
-              <p className="section-subtitle">We don't just rent cars — we deliver unforgettable driving experiences.</p>
+              <p className="section-subtitle">{t('home.whySubtitle')}</p>
             </motion.div>
 
             <div className="grid-4" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
               {[
-                { Icon: Shield, title: 'Fully Insured', desc: 'All vehicles covered with comprehensive insurance for your peace of mind.' },
-                { Icon: Clock, title: '24/7 Support', desc: 'Our team is always available to assist you anytime, day or night.' },
-                { Icon: Star, title: 'Premium Fleet', desc: '200+ meticulously maintained vehicles from top global brands.' },
-                { Icon: CheckCircle, title: 'Instant Booking', desc: 'Book in minutes with real-time availability and instant confirmation.' },
+                { Icon: Shield, title: t('home.features.f1.title'), desc: t('home.features.f1.desc') },
+                { Icon: Clock, title: t('home.features.f2.title'), desc: t('home.features.f2.desc') },
+                { Icon: Star, title: t('home.features.f3.title'), desc: t('home.features.f3.desc') },
+                { Icon: CheckCircle, title: t('home.features.f4.title'), desc: t('home.features.f4.desc') },
               ].map(({ Icon, title, desc }, i) => (
                 <motion.div
                   key={title}
@@ -79,10 +81,10 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="section-badge">Our Fleet</span>
-              <h2 className="section-title">Premium Vehicles for Every Journey</h2>
+              <span className="section-badge">{t('home.fleetBadge')}</span>
+              <h2 className="section-title">{t('home.fleetTitle')}</h2>
               <div className="divider-gold"></div>
-              <p className="section-subtitle">From city cruisers to supercar experiences — find your perfect drive.</p>
+              <p className="section-subtitle">{t('home.fleetSubtitle')}</p>
             </motion.div>
 
             {/* Category filters */}
@@ -94,7 +96,7 @@ export default function HomePage() {
                   className={`btn btn-sm ${activeCategory === cat ? 'btn-primary' : 'btn-ghost'}`}
                   style={{ textTransform: 'capitalize', minWidth: 90 }}
                 >
-                  {cat === 'all' ? 'All Cars' : cat}
+                  {cat === 'all' ? t('cars.filters.all') : t(`cars.filters.${cat}`)}
                 </button>
               ))}
             </div>
@@ -106,8 +108,8 @@ export default function HomePage() {
             </div>
 
             <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-              <Link href="/cars" className="btn btn-primary btn-lg">
-                View Full Fleet <ChevronRight size={18} />
+              <Link href="/cars" className="btn btn-primary btn-lg" style={{ gap: '0.5rem' }}>
+                {t('home.viewFullFleet')} <ChevronRight size={18} style={{ transform: t('dir') === 'rtl' ? 'rotate(180deg)' : 'none' }} />
               </Link>
             </div>
           </div>
@@ -121,8 +123,8 @@ export default function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="section-badge"><Star size={12} fill="currentColor" /> Reviews</span>
-              <h2 className="section-title">What Our Customers Say</h2>
+              <span className="section-badge"><Star size={12} fill="currentColor" /> {t('home.reviewsBadge')}</span>
+              <h2 className="section-title">{t('home.reviewsTitle')}</h2>
               <div className="divider-gold"></div>
             </motion.div>
 
@@ -179,17 +181,17 @@ export default function HomePage() {
           <div className="container" style={{ textAlign: 'center', position: 'relative' }}>
             <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
               <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', fontWeight: 800, marginBottom: '1rem' }}>
-                Ready to Drive Your <span className="text-gold">Dream Car?</span>
+                {t('home.ctaTitlePrefix')}<span className="text-gold">{t('home.ctaTitleGold')}</span>
               </h2>
               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', marginBottom: '2.5rem', maxWidth: 500, margin: '0 auto 2.5rem' }}>
-                Book in minutes. Drive today. Your perfect car is waiting.
+                {t('home.ctaSubtitle')}
               </p>
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                <Link href="/cars" className="btn btn-primary btn-lg">Browse Fleet</Link>
+                <Link href="/cars" className="btn btn-primary btn-lg">{t('home.browseFleet')}</Link>
                 <a href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '971500000000'}`}
                   target="_blank" rel="noopener noreferrer"
                   className="btn btn-outline btn-lg" style={{ borderColor: '#25d366', color: '#25d366' }}>
-                  WhatsApp Us
+                  {t('home.whatsappUs')}
                 </a>
               </div>
             </motion.div>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Star, Users, Fuel, Settings, ArrowRight } from 'lucide-react';
 import type { Car } from '@/data/cars';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 
 interface CarCardProps {
     car: Car;
@@ -11,6 +12,7 @@ interface CarCardProps {
 }
 
 export default function CarCard({ car, index = 0 }: CarCardProps) {
+    const { t } = useTranslation();
     return (
         <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -34,9 +36,9 @@ export default function CarCard({ car, index = 0 }: CarCardProps) {
                     <span className="badge badge-gold" style={{ textTransform: 'capitalize' }}>{car.category}</span>
                 </div>
                 {/* Availability */}
-                <div style={{ position: 'absolute', top: '0.75rem', right: '0.75rem' }}>
+                <div style={{ position: 'absolute', top: '0.75rem', [t('dir') === 'rtl' ? 'left' : 'right']: '0.75rem' }}>
                     <span className={`badge ${car.available ? 'badge-green' : 'badge-red'}`}>
-                        {car.available ? '● Available' : '○ Unavailable'}
+                        {car.available ? t('cars.available') : t('cars.unavailable')}
                     </span>
                 </div>
                 {/* Gold shimmer overlay */}
@@ -69,10 +71,10 @@ export default function CarCard({ car, index = 0 }: CarCardProps) {
                 {/* Specs */}
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem', marginBottom: '1.25rem' }}>
                     {[
-                        { Icon: Users, text: `${car.seats} Seats` },
+                        { Icon: Users, text: `${car.seats} ${t('cars.specs.seats')}` },
                         { Icon: Fuel, text: car.fuel },
                         { Icon: Settings, text: car.transmission },
-                        { Icon: Settings, text: `${car.doors} Doors` },
+                        { Icon: Settings, text: `${car.doors} ${t('cars.specs.doors')}` },
                     ].map(({ Icon, text }) => (
                         <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>
                             <Icon size={13} color="#c9a227" />
@@ -85,16 +87,16 @@ export default function CarCard({ car, index = 0 }: CarCardProps) {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 'auto' }}>
                     <div>
                         <span style={{ fontSize: '1.6rem', fontWeight: 800, background: 'linear-gradient(135deg,#c9a227,#e8c84d)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                            AED {car.pricePerDay.toLocaleString()}
+                            {t('common.currency')} {car.pricePerDay.toLocaleString()}
                         </span>
-                        <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', marginLeft: '0.25rem' }}>/day</span>
+                        <span style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.4)', [t('dir') === 'rtl' ? 'marginRight' : 'marginLeft']: '0.25rem' }}>/{t('cars.perDay')}</span>
                     </div>
                     <Link
                         href={car.available ? `/cars/${car.id}` : '#'}
                         className={`btn btn-sm ${car.available ? 'btn-primary' : 'btn-ghost'}`}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', opacity: car.available ? 1 : 0.5 }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', opacity: car.available ? 1 : 0.5, flexDirection: t('dir') === 'rtl' ? 'row-reverse' : 'row' }}
                     >
-                        Book <ArrowRight size={14} />
+                        {t('cars.bookNow')} <ArrowRight size={14} style={{ transform: t('dir') === 'rtl' ? 'rotate(180deg)' : 'none' }} />
                     </Link>
                 </div>
             </div>

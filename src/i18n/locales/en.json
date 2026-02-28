@@ -1,4 +1,38 @@
 {
+    "home": {
+        "whyBadge": "Why Golden Key?",
+        "whyTitle": "Experience the Difference",
+        "whySubtitle": "We don't just rent cars — we deliver unforgettable driving experiences.",
+        "features": {
+            "f1": {
+                "title": "Fully Insured",
+                "desc": "All vehicles covered with comprehensive insurance for your peace of mind."
+            },
+            "f2": {
+                "title": "24/7 Support",
+                "desc": "Our team is always available to assist you anytime, day or night."
+            },
+            "f3": {
+                "title": "Premium Fleet",
+                "desc": "200+ meticulously maintained vehicles from top global brands."
+            },
+            "f4": {
+                "title": "Instant Booking",
+                "desc": "Book in minutes with real-time availability and instant confirmation."
+            }
+        },
+        "fleetBadge": "Our Fleet",
+        "fleetTitle": "Premium Vehicles for Every Journey",
+        "fleetSubtitle": "From city cruisers to supercar experiences — find your perfect drive.",
+        "viewFullFleet": "View Full Fleet",
+        "reviewsBadge": "Reviews",
+        "reviewsTitle": "What Our Customers Say",
+        "ctaTitlePrefix": "Ready to Drive Your ",
+        "ctaTitleGold": "Dream Car?",
+        "ctaSubtitle": "Book in minutes. Drive today. Your perfect car is waiting.",
+        "browseFleet": "Browse Fleet",
+        "whatsappUs": "WhatsApp Us"
+    },
     "nav": {
         "home": "Home",
         "cars": "Our Fleet",
@@ -242,6 +276,7 @@
         "next": "Next",
         "currency": "AED",
         "days": "days",
-        "whatsapp": "WhatsApp"
+        "whatsapp": "WhatsApp",
+        "dir": "ltr"
     }
 }
