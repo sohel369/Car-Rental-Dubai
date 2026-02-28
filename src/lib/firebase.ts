@@ -12,14 +12,26 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Only initialize if we have a config or we are not in build/server phase where vars might be missing
-const canInitialize = typeof window !== 'undefined' || (process.env.NEXT_PUBLIC_FIREBASE_API_KEY && process.env.NEXT_PUBLIC_FIREBASE_API_KEY !== 'undefined');
+// Only initialize if we have a valid config. Missing config (like on Vercel preview) should not crash the app.
+const isConfigValid = !!firebaseConfig.apiKey &&
+  firebaseConfig.apiKey !== 'undefined' &&
+  firebaseConfig.apiKey.length > 10; // Extra check for real key
 
-const app = getApps().length
-  ? getApp()
-  : (canInitialize ? initializeApp(firebaseConfig) : null);
+let app = null;
 
+try {
+  if (getApps().length > 0) {
+    app = getApp();
+  } else if (isConfigValid) {
+    app = initializeApp(firebaseConfig);
+  }
+} catch (error) {
+  console.error("Firebase initialization failed:", error);
+}
+
+// Safely get services. These could still be null if app is null.
 export const auth = app ? getAuth(app) : null as any;
 export const db = app ? getFirestore(app) : null as any;
 export const storage = app ? getStorage(app) : null as any;
+
 export default app;
