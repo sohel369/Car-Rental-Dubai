@@ -51,9 +51,9 @@ export default function Navbar() {
                     </div>
                     <div>
                         <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff', lineHeight: 1.1 }}>
-                            Golden <span style={{ background: 'linear-gradient(135deg,#c9a227,#e8c84d)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Key</span>
+                            {t('nav.brandName')}
                         </div>
-                        <div style={{ fontSize: '0.65rem', color: '#a07d1c', fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase' }}>Car Rental</div>
+                        <div style={{ fontSize: '0.65rem', color: '#a07d1c', fontWeight: 500, letterSpacing: '0.12em', textTransform: 'uppercase' }}>{t('nav.carRental')}</div>
                     </div>
                 </Link>
 

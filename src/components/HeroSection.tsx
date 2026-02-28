@@ -126,8 +126,8 @@ export default function HeroSection() {
                         >
                             {[
                                 { Icon: Shield, text: t('common.confirm') },
-                                { Icon: Clock, text: '24/7 Support' },
-                                { Icon: Star, text: 'Best Prices' },
+                                { Icon: Clock, text: t('hero.support247', { defaultValue: '24/7 Support' }) },
+                                { Icon: Star, text: t('hero.bestPrices', { defaultValue: 'Best Prices' }) },
                             ].map(({ Icon, text }) => (
                                 <div key={text} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'rgba(255,255,255,0.45)', fontSize: '0.82rem' }}>
                                     <Icon size={14} color="#c9a227" />
@@ -150,7 +150,7 @@ export default function HeroSection() {
                         }}>
                             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
                                 <h2 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff' }}>{t('hero.searchCars')}</h2>
-                                <span className="badge badge-gold">Instant Booking</span>
+                                <span className="badge badge-gold">{t('hero.instantBooking', { defaultValue: 'Instant Booking' })}</span>
                             </div>
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -161,10 +161,10 @@ export default function HeroSection() {
                                         <input
                                             type="text"
                                             className="form-input"
-                                            placeholder="Dubai Airport, Downtown..."
+                                            placeholder={t('hero.searchPlaceholder')}
                                             value={pickup}
                                             onChange={e => setPickup(e.target.value)}
-                                            style={{ paddingLeft: i18n.language?.startsWith('ar') ? '0.9rem' : '2.5rem', paddingRight: i18n.language?.startsWith('ar') ? '2.5rem' : '0.9rem' }}
+                                            style={{ paddingLeft: (i18n.language === 'ar' || i18n.language === 'ar-AE') ? '0.9rem' : '2.5rem', paddingRight: (i18n.language === 'ar' || i18n.language === 'ar-AE') ? '2.5rem' : '0.9rem' }}
                                         />
                                     </div>
                                 </div>
@@ -194,10 +194,15 @@ export default function HeroSection() {
 
                             {/* Popular locations */}
                             <div style={{ marginTop: '1.5rem' }}>
-                                <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.6rem' }}>Popular Locations:</p>
+                                <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.35)', marginBottom: '0.6rem' }}>{t('hero.popularLocations')}</p>
                                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                                    {['Dubai Airport', 'Downtown', 'JBR', 'Palm Jumeirah'].map((loc) => (
-                                        <button key={loc} onClick={() => setPickup(loc)}
+                                    {[
+                                        { key: 'dxb', label: t('hero.locations.dxb') },
+                                        { key: 'downtown', label: t('hero.locations.downtown') },
+                                        { key: 'jbr', label: t('hero.locations.jbr') },
+                                        { key: 'palm', label: t('hero.locations.palm') }
+                                    ].map(({ key, label }) => (
+                                        <button key={key} onClick={() => setPickup(label)}
                                             style={{
                                                 padding: '0.3rem 0.8rem', borderRadius: 20, fontSize: '0.78rem',
                                                 background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)',
@@ -205,7 +210,7 @@ export default function HeroSection() {
                                             }}
                                             onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = '#c9a227'; (e.currentTarget as HTMLElement).style.color = '#c9a227'; }}
                                             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.1)'; (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.6)'; }}
-                                        >{loc}</button>
+                                        >{label}</button>
                                     ))}
                                 </div>
                             </div>

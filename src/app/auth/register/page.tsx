@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Mail, Lock, User, Car, ArrowRight, CheckCircle } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useTranslation } from 'react-i18next';
 import toast from 'react-hot-toast';
 
 const schema = z.object({
@@ -23,6 +24,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function RegisterPage() {
+    const { t, i18n } = useTranslation();
     const [showPass, setShowPass] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -36,16 +38,16 @@ export default function RegisterPage() {
     const password = watch('password', '');
     const passwordStrength = password.length === 0 ? 0 : password.length < 6 ? 1 : password.length < 10 ? 2 : 3;
     const strengthColors = ['transparent', '#ef4444', '#f59e0b', '#10b981'];
-    const strengthLabels = ['', 'Weak', 'Good', 'Strong'];
+    const strengthLabels = ['', t('auth.strengthWeak'), t('auth.strengthGood'), t('auth.strengthStrong')];
 
     const onSubmit = async (data: FormData) => {
         setLoading(true);
         try {
             await signUp(data.email, data.password, data.name);
-            toast.success('Account created! Welcome to Golden Key 🚗');
+            toast.success(t('auth.signUpSuccess'));
             router.push('/dashboard');
         } catch (err: any) {
-            toast.error(err.message || 'Registration failed');
+            toast.error(err.message || t('common.error'));
         } finally {
             setLoading(false);
         }
@@ -55,10 +57,10 @@ export default function RegisterPage() {
         setLoading(true);
         try {
             await signInWithGoogle();
-            toast.success('Account created with Google!');
+            toast.success(t('auth.googleSignUpSuccess'));
             router.push('/dashboard');
         } catch (err: any) {
-            toast.error(err.message || 'Google sign-up failed');
+            toast.error(err.message || t('common.error'));
         } finally {
             setLoading(false);
         }
@@ -104,10 +106,10 @@ export default function RegisterPage() {
                         </div>
                     </Link>
                     <h1 style={{ fontSize: '1.6rem', fontWeight: 800, color: '#fff', marginTop: '1rem', marginBottom: '0.3rem' }}>
-                        Create Account
+                        {t('auth.signUp')}
                     </h1>
                     <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.88rem' }}>
-                        Join Golden Key Car Rental today
+                        {t('auth.createToday')}
                     </p>
                 </div>
 
@@ -128,7 +130,7 @@ export default function RegisterPage() {
                         <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
                         <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                     </svg>
-                    Sign up with Google
+                    {t('auth.google')}
                 </button>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
@@ -194,15 +196,15 @@ export default function RegisterPage() {
                     <button type="submit" className="btn btn-primary w-full" disabled={loading}
                         style={{ padding: '0.9rem', marginTop: '0.25rem', justifyContent: 'center', opacity: loading ? 0.7 : 1 }}>
                         {loading ? <span className="spinner" style={{ width: 20, height: 20, borderWidth: 2 }} /> : (
-                            <><span>Create Account</span><ArrowRight size={16} /></>
+                            <><span style={{ marginInlineEnd: '0.5rem' }}>{t('auth.signUp')}</span><ArrowRight size={16} style={{ transform: i18n.language?.startsWith('ar') ? 'rotate(180deg)' : 'none' }} /></>
                         )}
                     </button>
                 </form>
 
                 <p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'rgba(255,255,255,0.45)', fontSize: '0.86rem' }}>
-                    Already have an account?{' '}
+                    {t('auth.alreadyHaveAccount')}{' '}
                     <Link href="/auth/login" style={{ color: '#c9a227', fontWeight: 600, textDecoration: 'none' }}>
-                        Sign in
+                        {t('auth.signInNow')}
                     </Link>
                 </p>
             </motion.div>

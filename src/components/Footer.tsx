@@ -26,9 +26,9 @@ export default function Footer() {
                             </div>
                             <div>
                                 <div style={{ fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>
-                                    Golden <span className="text-gold">Key</span>
+                                    {t('nav.brandName')}
                                 </div>
-                                <div style={{ fontSize: '0.65rem', color: '#a07d1c', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Car Rental</div>
+                                <div style={{ fontSize: '0.65rem', color: '#a07d1c', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{t('nav.carRental')}</div>
                             </div>
                         </div>
                         <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.7, marginBottom: '1.25rem' }}>
@@ -73,7 +73,7 @@ export default function Footer() {
                     {/* Services */}
                     <div>
                         <h4 style={{ color: '#c9a227', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '1.2rem' }}>{t('cars.title')}</h4>
-                        {[t('cars.filters.economy'), t('cars.filters.luxury'), t('cars.filters.suv'), t('cars.filters.sports'), 'Long-Term Rental', 'Airport Transfer'].map((s) => (
+                        {[t('cars.filters.economy'), t('cars.filters.luxury'), t('cars.filters.suv'), t('cars.filters.sports'), t('footer.longTermRental', { defaultValue: 'Long-Term Rental' }), t('footer.airportTransfer', { defaultValue: 'Airport Transfer' })].map((s) => (
                             <p key={s} style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', marginBottom: '0.6rem' }}>{s}</p>
                         ))}
                     </div>
@@ -100,11 +100,14 @@ export default function Footer() {
                         © {new Date().getFullYear()} Golden Key Car Rental L.L.C. {t('footer.rights')}
                     </p>
                     <div style={{ display: 'flex', gap: '1.5rem' }}>
-                        {['Privacy Policy', 'Terms & Conditions'].map((t) => (
-                            <Link key={t} href="#" style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.82rem', textDecoration: 'none', transition: 'color 0.2s' }}
+                        {[
+                            { label: t('footer.privacyPolicy', { defaultValue: 'Privacy Policy' }), href: '#' },
+                            { label: t('footer.termsConditions', { defaultValue: 'Terms & Conditions' }), href: '#' }
+                        ].map((link) => (
+                            <Link key={link.label} href={link.href} style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.82rem', textDecoration: 'none', transition: 'color 0.2s' }}
                                 onMouseEnter={e => (e.currentTarget.style.color = '#c9a227')}
                                 onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
-                            >{t}</Link>
+                            >{link.label}</Link>
                         ))}
                     </div>
                 </div>

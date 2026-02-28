@@ -116,7 +116,7 @@ export default function CarDetailPage() {
 
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem' }}>
                                     {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill={s <= Math.floor(car.rating) ? '#c9a227' : 'transparent'} color="#c9a227" />)}
-                                    <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>{car.rating} · {car.reviews} {t('booking.reviews', { defaultValue: 'reviews' })}</span>
+                                    <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem' }}>{car.rating} · {car.reviews} {t('booking.reviews')}</span>
                                 </div>
 
                                 <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '2rem' }}>{car.description}</p>
@@ -144,7 +144,7 @@ export default function CarDetailPage() {
 
                                 {/* Features */}
                                 <div>
-                                    <h3 style={{ color: '#c9a227', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>{t('cars.features', { defaultValue: 'Features Included' })}</h3>
+                                    <h3 style={{ color: '#c9a227', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>{t('cars.features')}</h3>
                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
                                         {car.features.map(feat => (
                                             <div key={feat} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'rgba(255,255,255,0.6)', fontSize: '0.88rem' }}>
@@ -176,11 +176,11 @@ export default function CarDetailPage() {
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
                                 <div className="form-group">
-                                    <label className="form-label"><Calendar size={13} style={{ marginRight: 4 }} />{t('hero.pickupDate')}</label>
+                                    <label className="form-label"><Calendar size={13} style={{ [t('dir') === 'rtl' ? 'marginLeft' : 'marginRight']: 4 }} />{t('hero.pickupDate')}</label>
                                     <input type="date" className="form-input" value={pickupDate} onChange={e => setPickupDate(e.target.value)} min={new Date().toISOString().split('T')[0]} />
                                 </div>
                                 <div className="form-group">
-                                    <label className="form-label"><Calendar size={13} style={{ marginRight: 4 }} />{t('hero.dropoffDate')}</label>
+                                    <label className="form-label"><Calendar size={13} style={{ [t('dir') === 'rtl' ? 'marginLeft' : 'marginRight']: 4 }} />{t('hero.dropoffDate')}</label>
                                     <input type="date" className="form-input" value={returnDate} onChange={e => setReturnDate(e.target.value)} min={pickupDate || new Date().toISOString().split('T')[0]} />
                                 </div>
                             </div>
@@ -208,7 +208,7 @@ export default function CarDetailPage() {
                             {/* Price Summary */}
                             <div style={{ background: 'rgba(201,162,39,0.05)', border: '1px solid rgba(201,162,39,0.15)', borderRadius: 12, padding: '1rem', marginBottom: '1.5rem' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.4rem' }}>
-                                    <span>{t('common.currency')} {car.pricePerDay} × {days} {t('common.days', { defaultValue: 'days' })}</span>
+                                    <span>{t('common.currency')} {car.pricePerDay} × {days} {t('common.days')}</span>
                                     <span>{t('common.currency')} {(car.pricePerDay * days).toLocaleString()}</span>
                                 </div>
                                 {addonsCost > 0 && (
@@ -240,7 +240,7 @@ export default function CarDetailPage() {
                                 onMouseEnter={e => (e.currentTarget.style.background = 'rgba(37,211,102,0.15)')}
                                 onMouseLeave={e => (e.currentTarget.style.background = 'rgba(37,211,102,0.1)')}
                             >
-                                <Phone size={15} /> {t('footer.contact')} WhatsApp
+                                <Phone size={15} /> {t('footer.contact')} {t('common.whatsapp')}
                             </a>
                         </motion.div>
                     </div>

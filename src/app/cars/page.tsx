@@ -8,10 +8,14 @@ import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { carsData } from '@/data/cars';
 import { Search, SlidersHorizontal } from 'lucide-react';
 
+import { useTranslation } from 'react-i18next';
+
 const categories = ['all', 'economy', 'luxury', 'suv', 'sports'] as const;
 type Category = typeof categories[number];
 
 export default function CarsPage() {
+    const { t, i18n } = useTranslation();
+    const isRtl = i18n.language?.startsWith('ar');
     const [search, setSearch] = useState('');
     const [category, setCategory] = useState<Category>('all');
     const [maxPrice, setMaxPrice] = useState(3000);
@@ -38,12 +42,12 @@ export default function CarsPage() {
                 }}>
                     <div className="container">
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                            <span className="section-badge" style={{ marginBottom: '1rem' }}>Our Fleet</span>
+                            <span className="section-badge" style={{ marginBottom: '1rem' }}>{t('nav.cars')}</span>
                             <h1 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, color: '#fff', marginBottom: '0.75rem' }}>
-                                Find Your Perfect <span className="text-gold">Drive</span>
+                                {t('cars.filters.findYourPerfectDrive')}
                             </h1>
                             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem' }}>
-                                {filtered.length} vehicles available · Filter to find your match
+                                {filtered.length} {t('cars.filters.vehiclesAvailable')} · {t('cars.filters.filterMatch')}
                             </p>
                         </motion.div>
                     </div>
@@ -53,12 +57,12 @@ export default function CarsPage() {
                     {/* Search & Filter Bar */}
                     <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
                         <div style={{ position: 'relative', flex: 1, minWidth: 220 }}>
-                            <Search size={16} color="rgba(255,255,255,0.3)" style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)' }} />
-                            <input type="text" placeholder="Search by car or brand..." value={search} onChange={e => setSearch(e.target.value)}
-                                className="form-input" style={{ paddingLeft: '2.7rem', width: '100%' }} />
+                            <Search size={16} color="rgba(255,255,255,0.3)" style={{ position: 'absolute', [isRtl ? 'right' : 'left']: '1rem', top: '50%', transform: 'translateY(-50%)' }} />
+                            <input type="text" placeholder={t('cars.filters.searchPlaceholder')} value={search} onChange={e => setSearch(e.target.value)}
+                                className="form-input" style={{ [isRtl ? 'paddingRight' : 'paddingLeft']: '2.7rem', width: '100%' }} />
                         </div>
                         <button onClick={() => setShowFilters(!showFilters)} className="btn btn-ghost" style={{ gap: '0.5rem' }}>
-                            <SlidersHorizontal size={16} /> Filters
+                            <SlidersHorizontal size={16} /> {t('cars.filters.filtersBtn')}
                         </button>
                     </div>
 
@@ -72,19 +76,19 @@ export default function CarsPage() {
                         >
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                                 <div className="form-group">
-                                    <label className="form-label">Max Price (AED/day): {maxPrice}</label>
+                                    <label className="form-label">{t('cars.filters.maxPrice')} ({t('common.currency')}/{t('cars.perDay').replace('/', '').trim()}): {maxPrice}</label>
                                     <input type="range" min={100} max={3000} step={50} value={maxPrice} onChange={e => setMaxPrice(+e.target.value)}
                                         style={{ width: '100%', accentColor: '#c9a227' }} />
                                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>
-                                        <span>AED 100</span><span>AED 3000</span>
+                                        <span>{t('common.currency')} 100</span><span>{t('common.currency')} 3000</span>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label className="form-label">Transmission</label>
+                                    <label className="form-label">{t('cars.filters.transmission')}</label>
                                     <select value={transmission} onChange={e => setTransmission(e.target.value)}
                                         className="form-input" style={{ cursor: 'pointer' }}>
-                                        <option value="all">All</option>
-                                        <option value="Automatic">Automatic</option>
+                                        <option value="all">{t('cars.filters.transmissionAll')}</option>
+                                        <option value="Automatic">{t('cars.specs.transmission')}</option>
                                         <option value="Manual">Manual</option>
                                     </select>
                                 </div>
@@ -96,9 +100,8 @@ export default function CarsPage() {
                     <div style={{ display: 'flex', gap: '0.65rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
                         {categories.map(cat => (
                             <button key={cat} onClick={() => setCategory(cat)}
-                                className={`btn btn-sm ${category === cat ? 'btn-primary' : 'btn-ghost'}`}
-                                style={{ textTransform: 'capitalize' }}>
-                                {cat === 'all' ? 'All Cars' : cat}
+                                className={`btn btn-sm ${category === cat ? 'btn-primary' : 'btn-ghost'}`}>
+                                {t(`cars.filters.${cat}`)}
                             </button>
                         ))}
                     </div>
@@ -113,7 +116,7 @@ export default function CarsPage() {
                     ) : (
                         <div style={{ textAlign: 'center', padding: '4rem', color: 'rgba(255,255,255,0.4)' }}>
                             <Search size={40} style={{ margin: '0 auto 1rem', display: 'block', opacity: 0.4 }} />
-                            <p>No cars match your filters. Try adjusting your search.</p>
+                            <p>{t('cars.filters.noMatch')}</p>
                         </div>
                     )}
                 </div>

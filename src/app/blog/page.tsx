@@ -22,12 +22,12 @@ export default function BlogPage() {
                 }}>
                     <div className="container">
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center' }}>
-                            <span className="section-badge">{t('nav.blog')}</span>
+                            <span className="section-badge">{t('blog.badge')}</span>
                             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, color: '#fff', margin: '1.25rem 0 1rem' }}>
-                                The Golden <span className="text-gold">Journal</span>
+                                {t('blog.title')}
                             </h1>
                             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1.1rem', maxWidth: 600, margin: '0 auto' }}>
-                                Insights, guides, and inspiration for your next Dubai adventure.
+                                {t('blog.desc')}
                             </p>
                         </motion.div>
                     </div>
@@ -81,7 +81,7 @@ export default function BlogPage() {
                                             <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>{blog.author}</span>
                                         </div>
                                         <Link href={`/blog/${blog.id}`} className="btn btn-ghost btn-sm" style={{ gap: '0.4rem' }}>
-                                            Read More <ChevronRight size={14} />
+                                            {t('blog.readMore')} <ChevronRight size={14} style={{ transform: t('dir') === 'rtl' ? 'rotate(180deg)' : 'none' }} />
                                         </Link>
                                     </div>
                                 </div>

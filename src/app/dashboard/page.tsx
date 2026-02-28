@@ -87,10 +87,10 @@ export default function Dashboard() {
                                     fontSize: '2.2rem', fontWeight: 900, color: '#000',
                                     boxShadow: '0 0 20px rgba(201,162,39,0.3)'
                                 }}>
-                                    {user.displayName?.[0] || user.email?.[0].toUpperCase()}
+                                    {user?.displayName?.[0] || user?.email?.[0].toUpperCase() || 'U'}
                                 </div>
-                                <h2 style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.25rem' }}>{user.displayName}</h2>
-                                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>{user.email}</p>
+                                <h2 style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.25rem' }}>{user?.displayName}</h2>
+                                <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem' }}>{user?.email}</p>
                             </div>
 
                             <div className="card" style={{ overflow: 'hidden' }}>
@@ -174,7 +174,9 @@ export default function Dashboard() {
                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}
                                                             className={`badge ${booking.status === 'confirmed' ? 'badge-green' : booking.status === 'cancelled' ? 'badge-red' : 'badge-gold'}`}>
                                                             {booking.status === 'confirmed' ? <CheckCircle size={14} /> : booking.status === 'cancelled' ? <XCircle size={14} /> : <Clock size={14} />}
-                                                            <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{booking.status}</span>
+                                                            <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                                                                {t(`dashboard.status.${booking.status}`, { defaultValue: booking.status })}
+                                                            </span>
                                                         </div>
                                                         {booking.status === 'pending' && (
                                                             <button
@@ -190,8 +192,8 @@ export default function Dashboard() {
                                     ) : (
                                         <div className="card" style={{ padding: '6rem', textAlign: 'center', opacity: 0.6 }}>
                                             <CarIcon size={48} color="#c9a227" style={{ margin: '0 auto 1.5rem' }} />
-                                            <h3 style={{ color: '#fff', marginBottom: '0.5rem' }}>{t('dashboard.noBookings', { defaultValue: "No bookings found" })}</h3>
-                                            <p style={{ fontSize: '0.9rem', marginBottom: '2rem' }}>You haven't made any bookings yet.</p>
+                                            <h3 style={{ color: '#fff', marginBottom: '0.5rem' }}>{t('dashboard.noBookings')}</h3>
+                                            <p style={{ fontSize: '0.9rem', marginBottom: '2rem' }}>{t('dashboard.noBookingsDesc')}</p>
                                             <Link href="/cars" className="btn btn-primary">{t('nav.cars')}</Link>
                                         </div>
                                     )}
@@ -201,7 +203,7 @@ export default function Dashboard() {
                             {activeTab !== 'bookings' && (
                                 <div className="card" style={{ padding: '4rem', textAlign: 'center', opacity: 0.5 }}>
                                     <Settings size={40} style={{ margin: '0 auto 1.25rem' }} />
-                                    <p>{activeTab === 'profile' ? t('dashboard.profile') : t('dashboard.settings')} Coming Soon</p>
+                                    <p>{activeTab === 'profile' ? t('dashboard.profile') : t('dashboard.settings')} {t('dashboard.comingSoon')}</p>
                                 </div>
                             )}
                         </div>

@@ -5,8 +5,11 @@ import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
 import { Award, Users, Car, Globe, Star } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 export default function AboutPage() {
+    const { t, i18n } = useTranslation();
+    const isRtl = i18n.language?.startsWith('ar');
     return (
         <>
             <Navbar />
@@ -19,12 +22,12 @@ export default function AboutPage() {
                     <div style={{ position: 'absolute', top: '30%', left: '5%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(201,162,39,0.08) 0%, transparent 70%)', pointerEvents: 'none' }} />
                     <div className="container" style={{ textAlign: 'center', position: 'relative' }}>
                         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-                            <span className="section-badge"><Award size={12} /> Our Story</span>
+                            <span className="section-badge"><Award size={12} /> {t('about.storyBadge')}</span>
                             <h1 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)', fontWeight: 900, color: '#fff', margin: '1.25rem 0 1rem' }}>
-                                The Golden Key <span className="text-gold">Difference</span>
+                                {t('about.storyTitle')}
                             </h1>
                             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1.1rem', maxWidth: 600, margin: '0 auto', lineHeight: 1.7 }}>
-                                Since our founding, we've been dedicated to redefining luxury car rental in the UAE. Every vehicle, every interaction, every journey — crafted to perfection.
+                                {t('about.storyDesc')}
                             </p>
                         </motion.div>
                     </div>
@@ -35,10 +38,10 @@ export default function AboutPage() {
                     <div className="container">
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2rem' }}>
                             {[
-                                { value: '200+', label: 'Premium Vehicles', Icon: Car },
-                                { value: '10K+', label: 'Happy Customers', Icon: Users },
-                                { value: '5★', label: 'Average Rating', Icon: Star },
-                                { value: '7+', label: 'Years of Excellence', Icon: Globe },
+                                { value: '200+', label: t('about.statsVehicles'), Icon: Car },
+                                { value: '10K+', label: t('about.statsCustomers'), Icon: Users },
+                                { value: '5★', label: t('about.statsRating'), Icon: Star },
+                                { value: '7+', label: t('about.statsYears'), Icon: Globe },
                             ].map(({ value, label, Icon }, i) => (
                                 <motion.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                                     style={{ textAlign: 'center', padding: '1rem' }}>
@@ -55,17 +58,17 @@ export default function AboutPage() {
                 <section className="section">
                     <div className="container">
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '4rem', alignItems: 'center' }}>
-                            <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+                            <motion.div initial={{ opacity: 0, x: isRtl ? 30 : -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                                 <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#fff', marginBottom: '1.25rem' }}>
-                                    Built on <span className="text-gold">Passion</span> for Driving
+                                    {t('about.passionTitle')}
                                 </h2>
                                 <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, marginBottom: '1.25rem', fontSize: '1rem' }}>
-                                    Golden Key Car Rental L.L.C was established with a single mission: to offer Dubai's residents and visitors the finest automotive experiences available. We believe that the right car doesn't just get you from A to B — it transforms your entire journey.
+                                    {t('about.passionDesc1')}
                                 </p>
                                 <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, fontSize: '1rem', marginBottom: '2rem' }}>
-                                    Our fleet is hand-picked, meticulously maintained, and continuously refreshed to ensure you always have access to the latest and greatest vehicles. From economy-friendly options to rare supercars — we have it all.
+                                    {t('about.passionDesc2')}
                                 </p>
-                                <Link href="/cars" className="btn btn-primary btn-lg">Explore Our Fleet</Link>
+                                <Link href="/cars" className="btn btn-primary btn-lg">{t('about.exploreFleet')}</Link>
                             </motion.div>
                             <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
                                 <div style={{ borderRadius: 24, overflow: 'hidden', border: '1px solid rgba(201,162,39,0.15)', boxShadow: '0 20px 50px rgba(0,0,0,0.4)' }}>
@@ -84,19 +87,19 @@ export default function AboutPage() {
                 <section className="section" style={{ background: 'linear-gradient(180deg, #0a0a0f 0%, #0f0f1a 100%)' }}>
                     <div className="container">
                         <motion.div className="section-header" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-                            <span className="section-badge">Our Values</span>
-                            <h2 className="section-title">What We Stand For</h2>
+                            <span className="section-badge">{t('about.valuesBadge')}</span>
+                            <h2 className="section-title">{t('about.valuesTitle')}</h2>
                             <div className="divider-gold"></div>
                         </motion.div>
 
                         <div className="grid-3" style={{ gap: '2rem' }}>
                             {[
-                                { title: 'Transparency', desc: 'No hidden fees, no surprises. Our pricing is straightforward and honest.', emoji: '🔍' },
-                                { title: 'Excellence', desc: 'Every car is inspected, cleaned, and certified before each rental.', emoji: '⭐' },
-                                { title: 'Customer First', desc: 'Your satisfaction drives every decision we make. Always.', emoji: '❤️' },
-                                { title: 'Innovation', desc: 'Continuously improving our tech and processes for seamless experiences.', emoji: '🚀' },
-                                { title: 'Sustainability', desc: 'Growing our electric and hybrid fleet for a greener Dubai.', emoji: '🌿' },
-                                { title: '24/7 Support', desc: 'Anytime you need us — call, WhatsApp, or email. We respond instantly.', emoji: '💬' },
+                                { title: t('about.values.v1.title'), desc: t('about.values.v1.desc'), emoji: '🔍' },
+                                { title: t('about.values.v2.title'), desc: t('about.values.v2.desc'), emoji: '⭐' },
+                                { title: t('about.values.v3.title'), desc: t('about.values.v3.desc'), emoji: '❤️' },
+                                { title: t('about.values.v4.title'), desc: t('about.values.v4.desc'), emoji: '🚀' },
+                                { title: t('about.values.v5.title'), desc: t('about.values.v5.desc'), emoji: '🌿' },
+                                { title: t('about.values.v6.title'), desc: t('about.values.v6.desc'), emoji: '💬' },
                             ].map(({ title, desc, emoji }, i) => (
                                 <motion.div key={title} className="card" style={{ padding: '2.5rem' }}
                                     initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
